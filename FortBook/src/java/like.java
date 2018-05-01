@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 
+import com.fortbookservices.ClassNotFoundException_Exception;
+import com.fortbookservices.SQLException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -85,7 +89,13 @@ public class like extends HttpServlet {
     private static void likeStatus(int postid, int userid) {
         com.fortbookservices.LikeService_Service service = new com.fortbookservices.LikeService_Service();
         com.fortbookservices.LikeService port = service.getLikeServicePort();
-        port.likeStatus(postid, userid);
+        try {
+            port.likeStatus(postid, userid);
+        } catch (ClassNotFoundException_Exception ex) {
+            Logger.getLogger(like.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException_Exception ex) {
+            Logger.getLogger(like.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
  

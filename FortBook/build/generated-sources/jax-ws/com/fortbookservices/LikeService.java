@@ -6,6 +6,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -27,15 +28,22 @@ public interface LikeService {
      * 
      * @param postid
      * @param userid
+     * @throws SQLException_Exception
+     * @throws ClassNotFoundException_Exception
      */
     @WebMethod
     @RequestWrapper(localName = "likeStatus", targetNamespace = "http://fortbookservices.com/", className = "com.fortbookservices.LikeStatus")
     @ResponseWrapper(localName = "likeStatusResponse", targetNamespace = "http://fortbookservices.com/", className = "com.fortbookservices.LikeStatusResponse")
-    @Action(input = "http://fortbookservices.com/LikeService/likeStatusRequest", output = "http://fortbookservices.com/LikeService/likeStatusResponse")
+    @Action(input = "http://fortbookservices.com/LikeService/likeStatusRequest", output = "http://fortbookservices.com/LikeService/likeStatusResponse", fault = {
+        @FaultAction(className = ClassNotFoundException_Exception.class, value = "http://fortbookservices.com/LikeService/likeStatus/Fault/ClassNotFoundException"),
+        @FaultAction(className = SQLException_Exception.class, value = "http://fortbookservices.com/LikeService/likeStatus/Fault/SQLException")
+    })
     public void likeStatus(
         @WebParam(name = "postid", targetNamespace = "")
         int postid,
         @WebParam(name = "userid", targetNamespace = "")
-        int userid);
+        int userid)
+        throws ClassNotFoundException_Exception, SQLException_Exception
+    ;
 
 }

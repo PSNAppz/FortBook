@@ -26,22 +26,6 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-LikeService" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/LikeService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LikeService" destdir="${build.generated.dir}/jax-wsCache/LikeService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/LikeService/wsdl/localhost_8080/FortBookServices/LikeService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/FortBookServices/LikeService?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/LikeService/wsdl/localhost_8080/FortBookServices/LikeService.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/LikeService"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/LikeService">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-LikeService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/com/fortbookservices"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/LikeService"/>
-    </target>
     <target name="wsimport-client-PostService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/PostService"/>
         <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PostService" destdir="${build.generated.dir}/jax-wsCache/PostService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/PostService/wsdl/localhost_8080/FortBookServices/PostService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/FortBookServices/PostService?wsdl" xnocompile="true" xendorsed="true">
@@ -58,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/com/fortbookservices"/>
         <delete dir="${build.generated.dir}/jax-wsCache/PostService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-LikeService, wsimport-client-PostService"/>
+    <target name="wsimport-client-LikeService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/LikeService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/LikeService" destdir="${build.generated.dir}/jax-wsCache/LikeService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/LikeService/wsdl/localhost_8080/FortBookServices/LikeService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/FortBookServices/LikeService?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/LikeService/wsdl/localhost_8080/FortBookServices/LikeService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/LikeService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/LikeService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-LikeService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/com/fortbookservices"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/LikeService"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-PostService, wsimport-client-LikeService"/>
 </project>

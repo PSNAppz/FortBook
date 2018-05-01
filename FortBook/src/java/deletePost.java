@@ -34,7 +34,7 @@ public class deletePost extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
            
-            out.println("<h1>Servlet deletePost at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet deletePost at " + request.getParameter("postid") + "</h1>");
         
         }
     }
@@ -65,7 +65,10 @@ public class deletePost extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        deleteStatus(Integer.parseInt(request.getParameter("postid")));
+                    response.sendRedirect("home.jsp");
+
+        
     }
 
     /**
@@ -77,5 +80,11 @@ public class deletePost extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static String deleteStatus(int postid) {
+        com.fortbookservices.PostService_Service service = new com.fortbookservices.PostService_Service();
+        com.fortbookservices.PostService port = service.getPostServicePort();
+        return port.deleteStatus(postid);
+    }
 
 }

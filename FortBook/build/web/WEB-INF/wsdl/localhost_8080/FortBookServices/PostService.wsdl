@@ -4,12 +4,6 @@
 <xsd:import namespace="http://fortbookservices.com/" schemaLocation="http://localhost:8080/FortBookServices/PostService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="hello">
-<part name="parameters" element="tns:hello"/>
-</message>
-<message name="helloResponse">
-<part name="parameters" element="tns:helloResponse"/>
-</message>
 <message name="PostStatus">
 <part name="parameters" element="tns:PostStatus"/>
 </message>
@@ -22,29 +16,26 @@
 <message name="SQLException">
 <part name="fault" element="tns:SQLException"/>
 </message>
+<message name="DeleteStatus">
+<part name="parameters" element="tns:DeleteStatus"/>
+</message>
+<message name="DeleteStatusResponse">
+<part name="parameters" element="tns:DeleteStatusResponse"/>
+</message>
 <portType name="PostService">
-<operation name="hello">
-<input wsam:Action="http://fortbookservices.com/PostService/helloRequest" message="tns:hello"/>
-<output wsam:Action="http://fortbookservices.com/PostService/helloResponse" message="tns:helloResponse"/>
-</operation>
 <operation name="PostStatus">
 <input wsam:Action="http://fortbookservices.com/PostService/PostStatusRequest" message="tns:PostStatus"/>
 <output wsam:Action="http://fortbookservices.com/PostService/PostStatusResponse" message="tns:PostStatusResponse"/>
 <fault message="tns:ClassNotFoundException" name="ClassNotFoundException" wsam:Action="http://fortbookservices.com/PostService/PostStatus/Fault/ClassNotFoundException"/>
 <fault message="tns:SQLException" name="SQLException" wsam:Action="http://fortbookservices.com/PostService/PostStatus/Fault/SQLException"/>
 </operation>
+<operation name="DeleteStatus">
+<input wsam:Action="http://fortbookservices.com/PostService/DeleteStatusRequest" message="tns:DeleteStatus"/>
+<output wsam:Action="http://fortbookservices.com/PostService/DeleteStatusResponse" message="tns:DeleteStatusResponse"/>
+</operation>
 </portType>
 <binding name="PostServicePortBinding" type="tns:PostService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="hello">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="PostStatus">
 <soap:operation soapAction=""/>
 <input>
@@ -59,6 +50,15 @@
 <fault name="SQLException">
 <soap:fault name="SQLException" use="literal"/>
 </fault>
+</operation>
+<operation name="DeleteStatus">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 </binding>
 <service name="PostService">

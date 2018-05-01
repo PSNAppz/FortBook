@@ -125,8 +125,8 @@ if (session == null || session.getAttribute("loggedInUser") == null) {
             "root", "");
     Statement st = con.createStatement();
     Statement st2 = con.createStatement();
-
-    ResultSet rs,friendDetails;
+    Statement friendsQ = con.createStatement();
+    ResultSet rs,friendDetails,friends;
     rs = st.executeQuery("select username from users where email='" + email + "'");
     friendDetails =st2.executeQuery("select verified from users where email='" + email + "'");
     
@@ -138,12 +138,15 @@ if (session == null || session.getAttribute("loggedInUser") == null) {
             ver = 1;
         }
     }
+    int friendsCount= 0;
+    friends = friendsQ.executeQuery("select count(*) from friends where userid="+session.getAttribute("loggedInUserID") );
+    if(friends.next())
+        friendsCount = friends.getInt(1) - 1;
 %>
 <h2 id="username"><% out.println(uname); if(ver == 1){ %> <img width="18px" height="18px" src="assets/images/verif.png"> <% } %></h2>
         </div>
         <button type="button" class="btn btn-primary">
-  Friends <span class="badge badge-light">9</span>
-  <span class="sr-only">unread messages</span>
+  Friends <span class="badge badge-light"><% out.print(friendsCount);%></span>
 </button>
     </div>
     <div class="col-lg-8">
@@ -244,7 +247,7 @@ if (session == null || session.getAttribute("loggedInUser") == null) {
                             </button>  
                         </form>
                         <% }%>
-                            <h3 id="username">  <img width="50px" height="50px" class="card-img-left" src="assets/images/user.jpg" alt="Card image cap">
+                            <h3 id="username">  <img width="50px" height="50px" class="card-img-left" src="assets/images/user.jpg" alt="image">
                         <% out.println(unamePost); if(ver1 == 1){ %> <img width="18px" height="18px" src="assets/images/verif.png"> <% } %></h3>
                         <hr class="my-4">
                         <p class="lead" id="statuspost"><%out.println(posts.getString("post"));%></p>

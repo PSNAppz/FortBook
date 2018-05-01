@@ -34,8 +34,13 @@ public class PostService {
      * Web service operation
      */
     @WebMethod(operationName = "DeleteStatus")
-    public String DeleteStatus(@WebParam(name = "postid") int postid) {
-        //TODO write your implementation code here:
-        return null;
+    public String DeleteStatus(@WebParam(name = "postid") int postid) throws ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/FortBook?zeroDateTimeBehavior=convertToNull",
+            "root", "");
+    Statement st = con.createStatement();
+    int likes = 0;
+    st.execute("delete from posts where id="+postid) ;
+    return "Success";
     }
 }

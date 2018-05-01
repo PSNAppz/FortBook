@@ -27,6 +27,8 @@ public class ObjectFactory {
     private final static QName _SQLException_QNAME = new QName("http://fortbookservices.com/", "SQLException");
     private final static QName _ClassNotFoundException_QNAME = new QName("http://fortbookservices.com/", "ClassNotFoundException");
     private final static QName _PostStatus_QNAME = new QName("http://fortbookservices.com/", "PostStatus");
+    private final static QName _DeleteStatusResponse_QNAME = new QName("http://fortbookservices.com/", "DeleteStatusResponse");
+    private final static QName _DeleteStatus_QNAME = new QName("http://fortbookservices.com/", "DeleteStatus");
     private final static QName _PostStatusResponse_QNAME = new QName("http://fortbookservices.com/", "PostStatusResponse");
 
     /**
@@ -42,6 +44,22 @@ public class ObjectFactory {
      */
     public SQLException createSQLException() {
         return new SQLException();
+    }
+
+    /**
+     * Create an instance of {@link DeleteStatusResponse }
+     * 
+     */
+    public DeleteStatusResponse createDeleteStatusResponse() {
+        return new DeleteStatusResponse();
+    }
+
+    /**
+     * Create an instance of {@link DeleteStatus }
+     * 
+     */
+    public DeleteStatus createDeleteStatus() {
+        return new DeleteStatus();
     }
 
     /**
@@ -125,6 +143,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://fortbookservices.com/", name = "PostStatus")
     public JAXBElement<PostStatus> createPostStatus(PostStatus value) {
         return new JAXBElement<PostStatus>(_PostStatus_QNAME, PostStatus.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteStatusResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://fortbookservices.com/", name = "DeleteStatusResponse")
+    public JAXBElement<DeleteStatusResponse> createDeleteStatusResponse(DeleteStatusResponse value) {
+        return new JAXBElement<DeleteStatusResponse>(_DeleteStatusResponse_QNAME, DeleteStatusResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteStatus }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://fortbookservices.com/", name = "DeleteStatus")
+    public JAXBElement<DeleteStatus> createDeleteStatus(DeleteStatus value) {
+        return new JAXBElement<DeleteStatus>(_DeleteStatus_QNAME, DeleteStatus.class, null, value);
     }
 
     /**

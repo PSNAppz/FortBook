@@ -31,8 +31,8 @@ public interface PostService {
      * @param userid
      * @return
      *     returns java.lang.String
-     * @throws SQLException_Exception
      * @throws ClassNotFoundException_Exception
+     * @throws SQLException_Exception
      */
     @WebMethod(operationName = "PostStatus")
     @WebResult(targetNamespace = "")
@@ -49,5 +49,20 @@ public interface PostService {
         int userid)
         throws ClassNotFoundException_Exception, SQLException_Exception
     ;
+
+    /**
+     * 
+     * @param postid
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(operationName = "DeleteStatus")
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "DeleteStatus", targetNamespace = "http://fortbookservices.com/", className = "com.fortbookservices.DeleteStatus")
+    @ResponseWrapper(localName = "DeleteStatusResponse", targetNamespace = "http://fortbookservices.com/", className = "com.fortbookservices.DeleteStatusResponse")
+    @Action(input = "http://fortbookservices.com/PostService/DeleteStatusRequest", output = "http://fortbookservices.com/PostService/DeleteStatusResponse")
+    public String deleteStatus(
+        @WebParam(name = "postid", targetNamespace = "")
+        int postid);
 
 }
